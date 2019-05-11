@@ -1,0 +1,1 @@
+jre\bin\java.exe -jar grid1-1.0.jar

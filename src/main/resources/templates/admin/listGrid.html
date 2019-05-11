@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/admin/adminHeader::html('网格显示')" ></head>
+
+<body class="hold-transition skin-blue  layout-boxed">
+
+<script>
+    $(function(){
+
+    	
+        var data4Vue = {
+                uri:'grids',
+                beans: [],
+                buyTotal: 0,
+                profitTotal: 0,
+                pagination:{},
+                file: null
+            };
+
+            //ViewModel
+            var vue = new Vue({
+                el: '#workingArea',
+                data: data4Vue,
+                mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+                    this.list();
+                },
+                methods: {
+                    list:function(){
+                        var url =  this.uri;
+                        axios.get(url).then(function(response) {
+                            vue.beans = response.data.grids;
+                            vue.buyTotal = response.data.buyTotal;
+                            vue.profitTotal = response.data.profitTotal;
+                        });
+                    }
+                }
+            });    	
+
+                   
+            
+    });
+
+
+
+    
+</script>
+
+<div class="wrapper" id="workingArea">
+  <div th:replace="include/admin/adminNavigator::html" ></div>
+  <div th:replace="include/admin/adminSidebar::html" ></div>
+
+
+
+  <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+
+    <section class="content">
+		<div class="row">
+	        <div class="col-xs-12">
+	          <div class="box">
+	            <div class="box-header">
+	              <h3 class="box-title">网格清单</h3>
+	
+	              <div class="box-tools">
+	                <div class="input-group input-group-sm" style="width: 150px;">
+<!-- 	                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search"> -->
+	
+	                  <div class="input-group-btn">
+<!-- 	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button> -->
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body table-responsive no-padding">
+	              <table id="sort" class="table table-hover">
+	                <tr>
+<!-- 	                  <th class="thinth">id</th> -->
+	                  <th >序号</th>
+	                  <th >档位</th>
+	                  <th >买入价格</th>
+	                  <th >卖出价格</th>
+	                  <th >买入数量</th>
+	                  <th >买入金额</th>
+	                  <th >卖出数量</th>
+	                  <th >卖出金额</th>
+	                  <th >盈利金额</th>
+	                  <th >盈利比例</th>
+	                </tr>
+	                <tbody>
+	                <template v-for="bean in beans ">
+		                <td>{{bean.num}}</td>
+		                <td>{{bean.gear | formatMoneyFilter}}</td>
+		                <td>{{bean.buyPrice  | formatMoneyFilter}}</td>
+		                <td>{{bean.sellPrice | formatMoneyFilter }}</td>
+		                <td>{{bean.buyAmount | formatNumberFilter}}</td>
+		                <td>{{bean.buyCost | formatMoneyFilter }}</td>
+		                <td>{{bean.sellAmount | formatNumberFilter}}</td>
+		                <td>{{bean.sellCost | formatMoneyFilter}}</td>
+		                <td>{{bean.profit | formatMoneyFilter }}</td>
+		                <td>{{bean.profitRate*100 | formatMoneyFilter }}%</td>
+
+	                </template>
+	                
+	              </tbody></table>
+	            </div>
+	          </div>
+	<div class="row">
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{buyTotal | formatMoneyFilter}}</h3>
+
+              <p>总投入</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-cny"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3> {{profitTotal | formatMoneyFilter}}</h3>
+
+              <p>总利润</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-thumbs-o-up"></i>
+            </div>
+          </div>
+        </div>        
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3> {{profitTotal*100/buyTotal | formatMoneyFilter}}<sup style="font-size: 20px">%</sup></h3>
+
+              <p>利润率</p>
+            </div>
+            <div class="icon">
+              <i class="fa  fa-line-chart"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>	          
+
+
+				  	          
+	        </div>
+	       
+        
+	        
+	      </div>
+	      
+    </section>
+  </div>
+  
+	<div th:replace="include/admin/adminFooter::html" ></div>
+</div>
+</body>
+</html>

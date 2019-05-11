@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/admin/adminHeader::html('关于本站')" ></head>
+
+
+
+<body class="hold-transition skin-blue  layout-boxed">
+
+<script>
+    $(function(){
+    });
+</script>
+
+
+<div class="wrapper" id="workingArea">
+  <div th:replace="include/admin/adminNavigator::html" ></div>
+  <div th:replace="include/admin/adminSidebar::html" ></div>
+
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        	关于本站
+      </h1>
+    </section>
+
+    <section class="content">
+		<div class="row">
+	        <div class="col-xs-12">
+	          <div class="box">
+	            <div class="box-header">
+<!-- 	              <h3 class="box-title">配置清单</h3> -->
+	
+<!-- 	              <div class="box-tools"> -->
+<!-- 	                <div class="input-group input-group-sm" style="width: 150px;"> -->
+<!-- 	                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search"> -->
+	
+<!-- 	                  <div class="input-group-btn"> -->
+<!-- 	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button> -->
+<!-- 	                  </div> -->
+<!-- 	                </div> -->
+<!-- 	              </div> -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body table-responsive no-padding">
+	              
+	             <div style="padding:15px">
+	             	<p>大家好，我是how2j站长, 是 ETF拯救世界同志的忠实粉丝，同时也是一名程序员。</p>
+	             	<p>近期 ETF拯救世界通知推出了他的网格交易系统 1.0, 出于工作便利，做了这么一个软件来演示网格交易，现免费开源出来方便有兴趣的同道中人使用。</p>	
+	             	<p>
+	             	关于本应用如何安装，使用，改进的建议意见，请点击：
+	             	<a href="http://how2j.cn/k/opensource/opensource-mybaby/2019.html">http://how2j.cn/k/opensource/opensource-mybaby/2019.html</a>
+	             	</p>	
+	             	
+	             	
+	             		
+	             </div>
+	              
+	              
+	            </div>
+	          </div>
+	          
+	          
+	          
+	          
+
+					          
+	        </div>
+	       
+        
+	        
+	      </div>
+	      
+    </section>
+  </div>
+ 	<div th:replace="include/admin/adminFooter::html" ></div>
+</div>
+</body>
+</html>
